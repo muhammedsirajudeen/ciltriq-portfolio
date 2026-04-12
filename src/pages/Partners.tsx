@@ -2,7 +2,8 @@ import {
   Building2, Users, HeartPulse, ShoppingCart, GraduationCap,
   Home, Package, Star
 } from "lucide-react";
-import { Handshake, IndianRupee } from "@phosphor-icons/react";
+import { Handshake } from "@phosphor-icons/react";
+import { IndianRupee } from "lucide-react";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { Marquee } from "@/components/ui/marquee";
 import { NumberTicker } from "@/components/ui/number-ticker";
