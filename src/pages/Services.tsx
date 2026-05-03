@@ -6,6 +6,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { MagicCard } from "@/components/ui/magic-card";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import { Link } from "react-router-dom";
 
 const services = [
@@ -82,10 +83,10 @@ const Services = () => {
           <BlurFade delay={0.8}>
             <div className="text-center mt-14">
               <Link to="/contact">
-                <ShimmerButton variant="primary" className="text-base px-8 py-4">
+                <RainbowButton className="text-base px-8 py-4">
                   Start a Project
-                  <ArrowRight size={20} strokeWidth={1.5} />
-                </ShimmerButton>
+                  <ArrowRight size={20} strokeWidth={1.5} className="ml-2" />
+                </RainbowButton>
               </Link>
             </div>
           </BlurFade>

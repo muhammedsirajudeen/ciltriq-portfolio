@@ -7,6 +7,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import { ShineBorder } from "@/components/ui/shine-border";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import { NumberTicker } from "@/components/ui/number-ticker";
 import { Ripple } from "@/components/ui/ripple";
 
@@ -112,10 +113,10 @@ const Contact = () => {
                         />
                       </div>
 
-                      <ShimmerButton variant="primary" className="w-full py-4 text-base" onClick={handleSubmit}>
+                      <RainbowButton className="w-full py-4 text-base" onClick={handleSubmit}>
                         Book My Free Audit
-                        <ArrowRight size={20} strokeWidth={1.5} />
-                      </ShimmerButton>
+                        <ArrowRight size={20} strokeWidth={1.5} className="ml-2" />
+                      </RainbowButton>
                     </div>
                   </>
                 )}

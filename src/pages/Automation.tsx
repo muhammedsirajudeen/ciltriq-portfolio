@@ -8,6 +8,8 @@ import { DotPattern } from "@/components/ui/dot-pattern";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { MagicCard } from "@/components/ui/magic-card";
 import { Link } from "react-router-dom";
+import { AnimatedBeamAutomation } from "@/components/AnimatedBeamAutomation";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 
 const features = [
   "Instant WhatsApp replies, 24 hours a day",
@@ -75,32 +77,19 @@ const Automation = () => {
               </BlurFade>
               <BlurFade delay={0.4}>
                 <Link to="/contact">
-                  <ShimmerButton variant="primary">
-                    <Bot size={20} strokeWidth={1.5} />
+                  <RainbowButton>
+                    <Bot size={20} strokeWidth={1.5} className="mr-2" />
                     Automate My Business
-                  </ShimmerButton>
+                  </RainbowButton>
                 </Link>
               </BlurFade>
             </div>
 
             <div>
               <BlurFade delay={0.3} direction="left">
-                {/* Channel flow visual */}
-                <div className="bg-white rounded-2xl border card-shadow p-8">
-                  <div className="text-center mb-6">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-3">
-                      <Bot size={32} strokeWidth={1.5} className="text-primary" />
-                    </div>
-                    <p className="font-heading font-semibold text-sm">AI Bot Core</p>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    {channels.map(({ Icon, label }) => (
-                      <div key={label} className="flex items-center gap-3 p-3 rounded-xl bg-surface border">
-                        <Icon size={24} className="text-ctext-secondary" />
-                        <span className="font-body text-sm">{label}</span>
-                      </div>
-                    ))}
-                  </div>
+                {/* Channel flow visual - Replaced with Animated Beam */}
+                <div className="bg-white rounded-2xl border card-shadow p-4 sm:p-8">
+                  <AnimatedBeamAutomation />
                 </div>
 
                 {/* Live activity */}

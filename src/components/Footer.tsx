@@ -94,10 +94,10 @@ const Footer = () => {
             </ul>
             <div className="mt-5">
               <a href="https://wa.me/918848300000" target="_blank" rel="noopener noreferrer">
-                <ShimmerButton variant="secondary" className="text-xs border-white/20 text-white hover:bg-white hover:text-ctext-primary">
-                  <WhatsappLogo size={20} weight="fill" className="text-secondary" />
+                <button className="flex items-center gap-2 px-4 py-2.5 bg-[#25D366] hover:bg-[#128C7E] text-white rounded-lg transition-colors font-body text-sm font-medium">
+                  <WhatsappLogo size={20} weight="fill" className="text-white" />
                   WhatsApp Us
-                </ShimmerButton>
+                </button>
               </a>
             </div>
           </div>

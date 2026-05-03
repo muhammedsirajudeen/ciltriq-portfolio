@@ -13,6 +13,12 @@ import { NumberTicker } from "@/components/ui/number-ticker";
 import { Marquee } from "@/components/ui/marquee";
 import { MagicCard } from "@/components/ui/magic-card";
 import { ShineBorder } from "@/components/ui/shine-border";
+import { SpinningText } from "@/components/ui/spinning-text";
+import { RainbowButton } from "@/components/ui/rainbow-button";
+import {
+  ScrollVelocityContainer,
+  ScrollVelocityRow,
+} from "@/components/ui/scroll-based-velocity";
 
 const stats = [
   { icon: Users, value: 50, suffix: "+", label: "Clients Served" },
@@ -48,19 +54,25 @@ const services = [
 const HeroSection = () => (
   <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
     <GridPattern animated accentColor="#2563EB" strokeColor="rgba(0,0,0,0.07)" />
-    <div className="absolute top-20 right-20 w-96 h-96 rounded-full bg-primary/[0.06] blur-3xl pointer-events-none" />
-    <div className="absolute bottom-20 left-10 w-72 h-72 rounded-full bg-ctext-primary/[0.03] blur-3xl pointer-events-none" />
+    <div className="absolute top-20 right-0 sm:right-20 w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-primary/[0.06] blur-3xl pointer-events-none" />
+    <div className="absolute bottom-20 left-0 sm:left-10 w-64 sm:w-72 h-64 sm:h-72 rounded-full bg-ctext-primary/[0.03] blur-3xl pointer-events-none" />
     <div
       className="absolute inset-0 pointer-events-none"
       style={{ maskImage: "linear-gradient(to bottom, white 50%, transparent)" }}
     />
 
-    <div className="relative z-10 max-w-5xl mx-auto px-4 text-center py-12">
+    <div className="absolute right-20 top-1/3 hidden lg:flex items-center justify-center z-10 opacity-40 pointer-events-none">
+      <SpinningText radius={4.5} className="font-heading font-medium text-lg text-primary">
+        CILTRIQ • TECHNOLOGIES • 
+      </SpinningText>
+    </div>
+
+    <div className="relative z-10 w-full max-w-5xl mx-auto px-4 text-center py-12">
       <BlurFade delay={0.1}>
-        <ShineBorder className="inline-block mb-6">
-          <div className="flex items-center gap-2 px-4 py-1.5">
-            <BadgeCheck size={16} strokeWidth={1.5} className="text-primary" />
-            <span className="font-body text-sm font-medium text-ctext-primary">Intelligent Tech Solutions</span>
+        <ShineBorder className="inline-block mb-6 max-w-full">
+          <div className="flex items-center gap-2 px-4 py-1.5 whitespace-nowrap overflow-hidden text-ellipsis">
+            <BadgeCheck size={16} strokeWidth={1.5} className="text-primary shrink-0" />
+            <span className="font-body text-xs sm:text-sm font-medium text-ctext-primary truncate">Intelligent Tech Solutions</span>
           </div>
         </ShineBorder>
       </BlurFade>
@@ -72,30 +84,30 @@ const HeroSection = () => (
       </BlurFade>
 
       <BlurFade delay={0.3}>
-        <div className="h-12 flex items-center justify-center mb-4">
+        <div className="h-16 sm:h-12 flex items-center justify-center mb-4">
           <WordRotate
             words={["Custom Apps", "AI Automation", "Revenue Growth", "Smart Bots"]}
-            className="font-heading text-2xl sm:text-3xl font-bold text-primary"
+            className="font-heading text-2xl sm:text-3xl font-bold text-primary text-center"
           />
         </div>
       </BlurFade>
 
       <BlurFade delay={0.4}>
-        <p className="font-body text-lg text-ctext-secondary max-w-2xl mx-auto mb-8">
+        <p className="font-body text-base sm:text-lg text-ctext-secondary max-w-2xl mx-auto mb-8 px-2">
           Transforming ambitious businesses through intelligent technology and AI-powered solutions
         </p>
       </BlurFade>
 
       <BlurFade delay={0.5}>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-          <Link to="/portfolio">
-            <ShimmerButton variant="primary">
-              <FolderKanban size={20} strokeWidth={1.5} />
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mb-12 w-full max-w-xs sm:max-w-none mx-auto">
+          <Link to="/portfolio" className="w-full sm:w-auto">
+            <RainbowButton className="w-full">
+              <FolderKanban size={20} strokeWidth={1.5} className="mr-2" />
               View Our Work
-            </ShimmerButton>
+            </RainbowButton>
           </Link>
-          <Link to="/contact">
-            <ShimmerButton variant="secondary">
+          <Link to="/contact" className="w-full sm:w-auto">
+            <ShimmerButton variant="secondary" className="w-full">
               Start a Project
               <ArrowRight size={20} strokeWidth={1.5} />
             </ShimmerButton>
@@ -104,7 +116,7 @@ const HeroSection = () => (
       </BlurFade>
 
       <BlurFade delay={0.6}>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-3xl mx-auto mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto mb-12">
           {stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <stat.icon size={24} strokeWidth={1.5} className="text-primary mx-auto mb-2" />
@@ -135,7 +147,7 @@ const HeroSection = () => (
 const ServicesPreview = () => (
   <section className="relative py-20 lg:py-28 overflow-hidden">
     <GridPattern strokeColor="rgba(0,0,0,0.04)" />
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <BlurFade>
         <div className="text-center mb-14">
           <span className="font-body text-xs uppercase tracking-widest text-primary font-medium">What We Do</span>
@@ -174,15 +186,32 @@ const ServicesPreview = () => (
   </section>
 );
 
+const VelocityScrollSection = () => (
+  <section className="relative py-12 lg:py-20 overflow-hidden bg-white">
+    <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
+      <ScrollVelocityContainer className="text-4xl font-bold tracking-[-0.02em] md:text-7xl md:leading-20 text-[#0a1a3c]">
+        <ScrollVelocityRow baseVelocity={3} direction={1}>
+          CILTRIQ TECHNOLOGIES • CILTRIQ TECHNOLOGIES •&nbsp;
+        </ScrollVelocityRow>
+        <ScrollVelocityRow baseVelocity={3} direction={-1}>
+          CILTRIQ TECHNOLOGIES • CILTRIQ TECHNOLOGIES •&nbsp;
+        </ScrollVelocityRow>
+      </ScrollVelocityContainer>
+      <div className="from-white pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r z-10"></div>
+      <div className="from-white pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l z-10"></div>
+    </div>
+  </section>
+);
+
 const CTASection = () => (
   <section className="relative py-20 lg:py-28 overflow-hidden">
     <GridPattern strokeColor="rgba(37,99,235,0.10)" />
-    <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
+    <div className="relative z-10 w-full max-w-3xl mx-auto px-4 text-center">
       <BlurFade>
         <ShineBorder className="inline-block">
           <div className="px-8 sm:px-16 py-12 sm:py-16">
             <Zap size={48} strokeWidth={1.5} className="text-primary mx-auto mb-6" />
-            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-ctext-primary mb-4">
+            <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-ctext-primary mb-4 leading-tight">
               Ready to Fix Your Revenue Leaks?
             </h2>
             <p className="font-body text-ctext-secondary mb-2">
@@ -192,11 +221,11 @@ const CTASection = () => (
               <NumberTicker value={30} className="text-3xl text-primary" />
               <span className="font-body text-ctext-secondary">minute free audit</span>
             </div>
-            <Link to="/contact">
-              <ShimmerButton variant="primary" className="text-base px-8 py-4">
+            <Link to="/contact" className="block w-full sm:w-auto mt-4">
+              <RainbowButton className="text-base px-8 py-4 w-full sm:w-auto">
                 Book My Free Audit
-                <ArrowRight size={20} strokeWidth={1.5} />
-              </ShimmerButton>
+                <ArrowRight size={20} strokeWidth={1.5} className="ml-2" />
+              </RainbowButton>
             </Link>
           </div>
         </ShineBorder>
@@ -210,6 +239,7 @@ const Index = () => {
     <main>
       <HeroSection />
       <ServicesPreview />
+      <VelocityScrollSection />
       <CTASection />
     </main>
   );

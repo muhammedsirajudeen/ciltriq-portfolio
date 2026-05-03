@@ -7,6 +7,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsAppFab from "./components/WhatsAppFab";
 import Index from "./pages/Index";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 
 const Services = lazy(() => import("./pages/Services"));
 const Portfolio = lazy(() => import("./pages/Portfolio"));
@@ -23,6 +24,7 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Navbar />
+        <ScrollProgress className="top-16 lg:top-20 z-50 opacity-60" />
         <Suspense fallback={<div className="min-h-screen" />}>
           <Routes>
             <Route path="/" element={<Index />} />

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
+import { RainbowButton } from "@/components/ui/rainbow-button";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -60,10 +61,10 @@ const Navbar = () => {
 
           <div className="hidden lg:block">
             <Link to="/contact">
-              <ShimmerButton variant="primary" className="text-xs">
+              <RainbowButton className="text-xs">
                 Get Free Consultation
                 <ArrowRight size={16} strokeWidth={1.5} />
-              </ShimmerButton>
+              </RainbowButton>
             </Link>
           </div>
 
@@ -95,10 +96,10 @@ const Navbar = () => {
               </Link>
             ))}
             <Link to="/contact" className="block pt-2">
-              <ShimmerButton variant="primary" className="w-full text-sm">
+              <RainbowButton className="w-full text-sm">
                 Get Free Consultation
                 <ArrowRight size={16} strokeWidth={1.5} />
-              </ShimmerButton>
+              </RainbowButton>
             </Link>
           </div>
         </div>
