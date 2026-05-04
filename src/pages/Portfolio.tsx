@@ -7,31 +7,17 @@ type Project = {
   title: string;
   description: string;
   tags: string[];
-  platform: "web" | "mobile";
+  platform: "web" | "mobile" | "automation";
   mobile_image: string;
   desktop_image: string;
   icon: string;
   live_link: string;
   year: string;
   industry: string;
-  completed:boolean
+  completed: boolean
 };
 
 const projects: Project[] = [
-  {
-    title: "Toobikes",
-    description:
-      "A scooty rental platform based in Kannur, Kerala. Built to handle bookings, real-time vehicle availability, and customer operations — giving operators full control over rentals while simplifying the booking experience for users.",
-    tags: ["Booking system", "Rental", "Dashboard", "Admin panel"],
-    platform: "web",
-    mobile_image: "/toobikes_mobile.png",
-    desktop_image: "/toobikes_desktop.png",
-    icon: "/toobikes_icon.png",
-    live_link: "https://toobikes.in",
-    year: "2026",
-    industry: "Transport & Mobility",
-    completed: true,
-  },
   {
     title: "FarmSphere",
     description:
@@ -60,6 +46,22 @@ const projects: Project[] = [
     industry: "Ecommerce",
     completed: false,
   },
+  {
+    title: "Toobikes",
+    description:
+      "A scooty rental platform based in Kannur, Kerala. Built to handle bookings, real-time vehicle availability, and customer operations — giving operators full control over rentals while simplifying the booking experience for users.",
+    tags: ["Booking system", "Rental", "Dashboard", "Admin panel"],
+    platform: "web",
+    mobile_image: "/toobikes_mobile.png",
+    desktop_image: "/toobikes_desktop.png",
+    icon: "/toobikes_icon.png",
+    live_link: "https://toobikes.in",
+    year: "2026",
+    industry: "Transport & Mobility",
+    completed: true,
+  },
+
+
   {
     title: "Kannur Gardens",
     description:
@@ -130,11 +132,68 @@ const projects: Project[] = [
     industry: "EdTech",
     completed: true,
   },
+  {
+    title: "Tydy Laundry Service",
+    description:
+      "An operations platform for a laundry service combining an admin dashboard with a WhatsApp automation bot. Built to manage orders, customer communication, and service workflows end-to-end — with Zoho Books integration for automated billing, invoicing, and financial tracking.",
+    tags: ["Admin panel", "WhatsApp bot", "Automation", "Zoho Books"],
+    platform: "automation",
+    mobile_image: "/tydy_mobile.png",
+    desktop_image: "/tydy_desktop.png",
+    icon: "/tydy_icon.png",
+    live_link: "https://wa.me/918590291351",
+    year: "2026",
+    industry: "Local Services & Operations",
+    completed: true,
+  },
+  {
+    title: "Bodha AI Medical Coding",
+    description:
+      "An AI-powered medical coding platform designed to assist healthcare providers in accurately converting clinical data into standardized billing codes. Built to streamline coding workflows, reduce manual errors, and improve claim processing efficiency — with a focus on speed, compliance, and operational scalability.",
+    tags: ["AI", "Healthcare", "Medical coding", "Automation"],
+    platform: "web",
+    mobile_image: "/bodha_mobile.png",
+    desktop_image: "/bodha_desktop.png",
+    icon: "/cq_icon.png",
+    live_link: "https://wa.me/918590291351",
+    year: "2026",
+    industry: "Healthcare & AI",
+    completed: false,
+  },
+  {
+    title: "Lifepartner Again",
+    description:
+      "A matrimony platform designed specifically for middle-aged women seeking a second chance at companionship. Built to provide a safe, respectful, and trust-driven environment — focusing on meaningful connections, verified profiles, and a supportive experience tailored for a new phase of life.",
+    tags: ["Matrimony", "Women-focused", "Trust & Safety", "Matching"],
+    platform: "mobile",
+    mobile_image: "/lifepartneragain_mobile.png",
+    desktop_image: "/lifepartneragain_desktop.png",
+    icon: "/lifepartneragain_icon.png",
+    live_link: "https://play.google.com/store/apps/details?id=com.ciltriq.arikil&hl=en_IN",
+    year: "2026",
+    industry: "Social & Relationships",
+    completed: false,
+  },
+  {
+    title: "Arikil Malayalam AI Friend",
+    description:
+      "A Malayalam-first conversational AI app designed to provide a natural, culturally relevant chat experience. Built to enable users to interact in their native language with high-quality responses — achieving 1K+ downloads and growing as an accessible AI companion for everyday conversations.",
+    tags: ["AI", "Conversational AI", "Mobile app", "Malayalam"],
+    platform: "mobile",
+    mobile_image: "/arikil_mobile.png",
+    desktop_image: "/arikil_desktop.png",
+    icon: "/arikil_icon.png",
+    live_link: "https://play.google.com/store/apps/details?id=com.ciltriq.arikil&hl=en_IN",
+    year: "2026",
+    industry: "Consumer AI",
+    completed: true,
+  },
+
 ];
 
 export default function Projects() {
   const [activeType, setActiveType] = useState<"client" | "partnership">("client");
-  const [activePlatform, setActivePlatform] = useState<"all" | "web" | "mobile">("all");
+  const [activePlatform, setActivePlatform] = useState<"all" | "web" | "mobile" | "automation">("all");
 
   const [visible, setVisible] = useState<boolean[]>([]);
   const refs = useRef<(HTMLDivElement | null)[]>([]);
@@ -186,15 +245,14 @@ export default function Projects() {
           <span className="text-xs uppercase tracking-widest text-muted-foreground mr-1">
             Platform
           </span>
-          {(["all", "web", "mobile"] as const).map((platform) => (
+          {(["all", "web", "mobile", "automation"] as const).map((platform) => (
             <button
               key={platform}
               onClick={() => setActivePlatform(platform)}
-              className={`px-3 sm:px-4 py-1.5 text-xs sm:text-sm rounded-full border transition ${
-                activePlatform === platform
+              className={`px-3 sm:px-4 py-1.5 text-xs sm:text-sm rounded-full border transition ${activePlatform === platform
                   ? "bg-foreground text-background border-foreground"
                   : "bg-transparent text-muted-foreground border-border hover:border-foreground/40"
-              }`}
+                }`}
             >
               {platform.charAt(0).toUpperCase() + platform.slice(1)}
             </button>
@@ -210,9 +268,8 @@ export default function Projects() {
               <div
                 key={i}
                 ref={(el) => (refs.current[i] = el)}
-                className={`rounded-2xl border bg-background overflow-hidden transition-all duration-700 ${
-                  visible[i] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                }`}
+                className={`rounded-2xl border bg-background overflow-hidden transition-all duration-700 ${visible[i] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                  }`}
               >
                 <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[280px] sm:min-h-[320px] lg:min-h-[360px]">
 
@@ -223,20 +280,18 @@ export default function Projects() {
                     <img
                       src={project.desktop_image}
                       alt={`${project.title} desktop`}
-                      className={`w-full h-full object-cover object-top-left transition-all duration-700 ${
-                        visible[i]
+                      className={`w-full h-full object-cover object-top-left transition-all duration-700 ${visible[i]
                           ? "scale-[0.92] opacity-100"
                           : "scale-[0.85] opacity-0"
-                      }`}
+                        }`}
                     />
 
                     {/* MOBILE */}
                     <div
-                      className={`absolute bottom-4 sm:bottom-10 lg:bottom-16 right-[-20px] sm:right-[-40px] lg:right-[-60px] w-28 sm:w-40 md:w-52 lg:w-64 transition-all duration-700 delay-150 ${
-                        visible[i]
+                      className={`absolute bottom-4 sm:bottom-10 lg:bottom-16 right-[-20px] sm:right-[-40px] lg:right-[-60px] w-28 sm:w-40 md:w-52 lg:w-64 transition-all duration-700 delay-150 ${visible[i]
                           ? "translate-x-0 opacity-100"
                           : "translate-x-12 opacity-0"
-                      }`}
+                        }`}
                     >
                       <img
                         src={project.mobile_image}
@@ -248,11 +303,10 @@ export default function Projects() {
 
                   {/* CONTENT */}
                   <div
-                    className={`p-5 sm:p-6 lg:p-8 flex flex-col justify-between transition-all duration-700 delay-200 ${
-                      visible[i]
+                    className={`p-5 sm:p-6 lg:p-8 flex flex-col justify-between transition-all duration-700 delay-200 ${visible[i]
                         ? "opacity-100 translate-y-0"
                         : "opacity-0 translate-y-6"
-                    }`}
+                      }`}
                   >
                     <div>
                       <div className="flex items-center gap-3 mb-4 sm:mb-5">
@@ -290,26 +344,26 @@ export default function Projects() {
                       </div>
                     </div>
 
-<div className="flex items-center gap-3 flex-wrap">
-  {project.completed ? (
-    <a
-      href={project.live_link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-black text-white text-sm font-medium transition hover:opacity-90"
-    >
-      <span>View Live</span>
+                    <div className="flex items-center gap-3 flex-wrap">
+                      {project.completed ? (
+                        <a
+                          href={project.live_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-black text-white text-sm font-medium transition hover:opacity-90"
+                        >
+                          <span>View Live</span>
 
-      <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white text-black text-xs transition-transform group-hover:translate-x-0.5">
-        <ArrowUpRight className="h-4 w-4"/>
-      </span>
-    </a>
-  ) : (
-    <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-muted text-muted-foreground text-sm font-medium cursor-not-allowed opacity-70">
-      In Progress
-    </div>
-  )}
-</div>
+                          <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white text-black text-xs transition-transform group-hover:translate-x-0.5">
+                            <ArrowUpRight className="h-4 w-4" />
+                          </span>
+                        </a>
+                      ) : (
+                        <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-muted text-muted-foreground text-sm font-medium cursor-not-allowed opacity-70">
+                          In Progress
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                 </div>
