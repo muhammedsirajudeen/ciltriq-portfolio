@@ -288,7 +288,7 @@ export default function Projects() {
 
                     {/* MOBILE */}
                     <div
-                      className={`absolute bottom-4 sm:bottom-10 lg:bottom-16 right-[-20px] sm:right-[-40px] lg:right-[-60px] w-28 sm:w-40 md:w-52 lg:w-64 transition-all duration-700 delay-150 ${visible[i]
+                      className={`absolute bottom-16 sm:bottom-16 lg:bottom-16 right-[-20px] sm:right-[-40px] lg:right-[-60px] w-28 sm:w-40 md:w-52 lg:w-64 transition-all duration-700 delay-150 ${visible[i]
                           ? "translate-x-0 opacity-100"
                           : "translate-x-12 opacity-0"
                         }`}
