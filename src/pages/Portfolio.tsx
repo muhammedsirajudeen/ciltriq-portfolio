@@ -27,7 +27,7 @@ const projects: Project[] = [
     mobile_image: "/farmsphere_mobile.png",
     desktop_image: "/farmsphere_desktop.png",
     icon: "/farmsphere_icon.png",
-    live_link: "https://farmsphere.in",
+    live_link: "https://farmsphere.app",
     year: "2026",
     industry: "AgriTech",
     completed: true,
@@ -61,7 +61,20 @@ const projects: Project[] = [
     completed: true,
   },
 
-
+  {
+    title: "Digital Nomads Kerala",
+    description:
+      "A community-driven platform connecting digital nomads across Kerala. Built to help remote workers discover coworking spaces, local events, stays, and like-minded people — fostering collaboration, networking, and a location-independent lifestyle within the state.",
+    tags: ["Community platform", "Remote work", "Networking", "Events"],
+    platform: "web",
+    mobile_image: "/digitalnomadskerala_mobile.png",
+    desktop_image: "/digitalnomadskerala_desktop.png",
+    icon: "/cq_icon.png",
+    live_link: "https://digitalnomadskerala.vercel.app",
+    year: "2026",
+    industry: "Community & Remote Work",
+    completed: true,
+  },
   {
     title: "Kannur Gardens",
     description:
@@ -250,8 +263,8 @@ export default function Projects() {
               key={platform}
               onClick={() => setActivePlatform(platform)}
               className={`px-3 sm:px-4 py-1.5 text-xs sm:text-sm rounded-full border transition ${activePlatform === platform
-                  ? "bg-foreground text-background border-foreground"
-                  : "bg-transparent text-muted-foreground border-border hover:border-foreground/40"
+                ? "bg-foreground text-background border-foreground"
+                : "bg-transparent text-muted-foreground border-border hover:border-foreground/40"
                 }`}
             >
               {platform.charAt(0).toUpperCase() + platform.slice(1)}
@@ -281,16 +294,16 @@ export default function Projects() {
                       src={project.desktop_image}
                       alt={`${project.title} desktop`}
                       className={`w-full h-full object-cover object-top-left transition-all duration-700 ${visible[i]
-                          ? "scale-[0.92] opacity-100"
-                          : "scale-[0.85] opacity-0"
+                        ? "scale-[0.92] opacity-100"
+                        : "scale-[0.85] opacity-0"
                         }`}
                     />
 
                     {/* MOBILE */}
                     <div
                       className={`absolute bottom-16 sm:bottom-16 lg:bottom-16 right-[-20px] sm:right-[-40px] lg:right-[-60px] w-28 sm:w-40 md:w-52 lg:w-64 transition-all duration-700 delay-150 ${visible[i]
-                          ? "translate-x-0 opacity-100"
-                          : "translate-x-12 opacity-0"
+                        ? "translate-x-0 opacity-100"
+                        : "translate-x-12 opacity-0"
                         }`}
                     >
                       <img
@@ -304,8 +317,8 @@ export default function Projects() {
                   {/* CONTENT */}
                   <div
                     className={`p-5 sm:p-6 lg:p-8 flex flex-col justify-between transition-all duration-700 delay-200 ${visible[i]
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-0 translate-y-6"
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-6"
                       }`}
                   >
                     <div>
