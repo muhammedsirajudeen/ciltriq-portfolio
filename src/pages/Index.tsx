@@ -38,9 +38,9 @@ import {
 } from "@/components/ui/scroll-based-velocity";
 
 const stats = [
-  { icon: Users, value: 50, suffix: "+", label: "Clients Served" },
-  { icon: FolderKanban, value: 200, suffix: "+", label: "Projects Delivered" },
-  { icon: Calendar, value: 5, suffix: "+", label: "Years Experience" },
+  { icon: Users, value: 10, suffix: "+", label: "Clients Served" },
+  { icon: FolderKanban, value: 10, suffix: "+", label: "Projects Delivered" },
+  { icon: Calendar, value: 6, suffix: "+", label: "Years Experience" },
   { icon: BadgeCheck, value: 98, suffix: "%", label: "Client Satisfaction" },
 ];
 
