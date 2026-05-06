@@ -1,121 +1,213 @@
 import { useState } from "react";
 import {
-  User, Building2, MessageSquare, ArrowRight, BadgeCheck, Zap
+  User,
+  Building2,
+  MessageSquare,
+  ArrowRight,
+  BadgeCheck,
+  BriefcaseBusiness,
 } from "lucide-react";
 import { WhatsappLogo } from "@phosphor-icons/react";
+
 import { BlurFade } from "@/components/ui/blur-fade";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import { ShineBorder } from "@/components/ui/shine-border";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { RainbowButton } from "@/components/ui/rainbow-button";
-import { NumberTicker } from "@/components/ui/number-ticker";
 import { Ripple } from "@/components/ui/ripple";
 
-const businessTypes = ["Retail", "Healthcare", "EdTech", "Real Estate", "Logistics", "Finance", "Other"];
+const businessTypes = [
+  "Retail",
+  "Healthcare",
+  "EdTech",
+  "Real Estate",
+  "Logistics",
+  "Finance",
+  "Manufacturing",
+  "Other",
+];
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: "", whatsapp: "", business: "", challenge: "" });
+  const [form, setForm] = useState({
+    name: "",
+    whatsapp: "",
+    business: "",
+    challenge: "",
+  });
+
   const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (field: string, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
+    setForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
   };
 
   const handleSubmit = () => {
-    if (form.name && form.whatsapp) {
-      setSubmitted(true);
-    }
+    if (!form.name || !form.whatsapp) return;
+
+    const message = `Hello Ciltriq Technologies,
+
+Name: ${form.name}
+WhatsApp: ${form.whatsapp}
+Industry: ${form.business || "Not specified"}
+
+Requirement:
+${form.challenge || "Not specified"}
+
+I would like to discuss this further.`;
+
+    const encodedMessage = encodeURIComponent(message);
+
+    const whatsappUrl = `https://wa.me/917907140006?text=${encodedMessage}`;
+
+    setSubmitted(true);
+
+    setTimeout(() => {
+      window.location.href = whatsappUrl;
+    }, 500);
   };
 
   return (
     <main className="pt-24 pb-20">
-      <section className="relative py-16 lg:py-24 overflow-hidden">
-        <GridPattern strokeColor="rgba(37,99,235,0.10)" />
-        <Ripple className="opacity-30" />
-        <div className="relative z-10 max-w-3xl mx-auto px-4">
+      <section className="relative overflow-hidden py-16 lg:py-24">
+        <GridPattern strokeColor="rgba(37,99,235,0.08)" />
+        <Ripple className="opacity-20" />
+
+        <div className="relative z-10 mx-auto max-w-3xl px-4">
           <BlurFade>
             <ShineBorder>
-              <div className="px-6 sm:px-12 lg:px-16 py-12 sm:py-16">
+              <div className="px-6 py-12 sm:px-12 sm:py-16 lg:px-16">
                 {submitted ? (
                   <div className="text-center">
-                    <BadgeCheck size={64} strokeWidth={1.5} className="text-secondary mx-auto mb-4" />
-                    <h2 className="font-heading text-3xl font-bold text-ctext-primary mb-3">
-                      Audit Booked Successfully
+                    <BadgeCheck
+                      size={60}
+                      strokeWidth={1.5}
+                      className="mx-auto mb-5 text-secondary"
+                    />
+
+                    <h2 className="mb-3 font-heading text-3xl font-semibold text-ctext-primary">
+                      Redirecting to WhatsApp
                     </h2>
+
                     <p className="font-body text-ctext-secondary">
-                      Our team will reach out to you on WhatsApp within 24 hours.
+                      Your information has been prepared for the conversation.
                     </p>
                   </div>
                 ) : (
                   <>
-                    <div className="text-center mb-10">
-                      <Zap size={48} strokeWidth={1.5} className="text-primary mx-auto mb-4" />
-                      <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-ctext-primary mb-3">
-                        Ready to Fix Your Revenue Leaks?
+                    <div className="mb-12 text-center">
+                      <BriefcaseBusiness
+                        size={44}
+                        strokeWidth={1.5}
+                        className="mx-auto mb-5 text-primary"
+                      />
+
+                      <h1 className="mb-4 font-heading text-3xl font-semibold tracking-tight text-ctext-primary sm:text-4xl lg:text-5xl">
+                        Discuss Your Software Requirements
                       </h1>
-                      <p className="font-body text-ctext-secondary mb-2">
-                        Get a free 30-minute business audit. No commitment, just clarity.
+
+                      <p className="mx-auto max-w-2xl font-body leading-relaxed text-ctext-secondary">
+                        We work with businesses to design and build scalable
+                        software systems, internal platforms, automation tools,
+                        AI integrations, and customer-facing applications.
                       </p>
-                      <div className="flex items-center justify-center gap-2">
-                        <NumberTicker value={30} className="text-3xl text-primary" />
-                        <span className="font-body text-ctext-secondary">minute free audit</span>
-                      </div>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-5">
                       <div className="relative">
-                        <User size={18} strokeWidth={1.5} className="absolute left-3 top-1/2 -translate-y-1/2 text-ctext-muted" />
+                        <User
+                          size={18}
+                          strokeWidth={1.5}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-ctext-muted"
+                        />
+
                         <input
                           type="text"
-                          placeholder="Your Name"
+                          placeholder="Full Name"
                           value={form.name}
-                          onChange={(e) => handleChange("name", e.target.value)}
-                          className="w-full pl-10 pr-4 py-3 rounded-xl border bg-white font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+                          onChange={(e) =>
+                            handleChange("name", e.target.value)
+                          }
+                          className="w-full rounded-xl border border-border bg-white py-3 pl-10 pr-4 font-body text-sm transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                         />
                       </div>
 
                       <div className="relative">
-                        <WhatsappLogo size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-ctext-muted" />
+                        <WhatsappLogo
+                          size={18}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-ctext-muted"
+                        />
+
                         <input
                           type="tel"
-                          placeholder="+91 WhatsApp Number"
+                          placeholder="WhatsApp Number"
                           value={form.whatsapp}
-                          onChange={(e) => handleChange("whatsapp", e.target.value)}
-                          className="w-full pl-10 pr-4 py-3 rounded-xl border bg-white font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
+                          onChange={(e) =>
+                            handleChange("whatsapp", e.target.value)
+                          }
+                          className="w-full rounded-xl border border-border bg-white py-3 pl-10 pr-4 font-body text-sm transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                         />
                       </div>
 
                       <div className="relative">
-                        <Building2 size={18} strokeWidth={1.5} className="absolute left-3 top-1/2 -translate-y-1/2 text-ctext-muted" />
+                        <Building2
+                          size={18}
+                          strokeWidth={1.5}
+                          className="absolute left-3 top-1/2 -translate-y-1/2 text-ctext-muted"
+                        />
+
                         <select
                           value={form.business}
-                          onChange={(e) => handleChange("business", e.target.value)}
-                          className="w-full pl-10 pr-4 py-3 rounded-xl border bg-white font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all appearance-none"
+                          onChange={(e) =>
+                            handleChange("business", e.target.value)
+                          }
+                          className="w-full appearance-none rounded-xl border border-border bg-white py-3 pl-10 pr-4 font-body text-sm transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                         >
-                          <option value="">Select Business Type</option>
-                          {businessTypes.map((b) => (
-                            <option key={b} value={b}>{b}</option>
+                          <option value="">Select Industry</option>
+
+                          {businessTypes.map((business) => (
+                            <option key={business} value={business}>
+                              {business}
+                            </option>
                           ))}
                         </select>
                       </div>
 
                       <div>
-                        <div className="flex items-center gap-2 mb-2">
-                          <MessageSquare size={16} strokeWidth={1.5} className="text-ctext-muted" />
-                          <span className="font-body text-sm text-ctext-muted">Describe your biggest challenge</span>
+                        <div className="mb-2 flex items-center gap-2">
+                          <MessageSquare
+                            size={16}
+                            strokeWidth={1.5}
+                            className="text-ctext-muted"
+                          />
+
+                          <span className="font-body text-sm text-ctext-muted">
+                            Project Details
+                          </span>
                         </div>
+
                         <textarea
-                          placeholder="Tell us about your biggest business challenge or revenue problem..."
+                          rows={5}
                           value={form.challenge}
-                          onChange={(e) => handleChange("challenge", e.target.value)}
-                          rows={4}
-                          className="w-full px-4 py-3 rounded-xl border bg-white font-body text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all resize-none"
+                          onChange={(e) =>
+                            handleChange("challenge", e.target.value)
+                          }
+                          placeholder="Describe your current systems, operational challenges, product idea, or the software you are looking to build."
+                          className="w-full resize-none rounded-xl border border-border bg-white px-4 py-3 font-body text-sm transition-all focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                         />
                       </div>
 
-                      <RainbowButton className="w-full py-4 text-base" onClick={handleSubmit}>
-                        Book My Free Audit
-                        <ArrowRight size={20} strokeWidth={1.5} className="ml-2" />
+                      <RainbowButton
+                        onClick={handleSubmit}
+                        className="w-full py-4 text-base font-medium"
+                      >
+                        Continue on WhatsApp
+                        <ArrowRight
+                          size={18}
+                          strokeWidth={1.5}
+                          className="ml-2"
+                        />
                       </RainbowButton>
                     </div>
                   </>

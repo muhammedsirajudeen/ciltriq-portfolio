@@ -7,7 +7,7 @@ const WhatsappIcon = ({ size = 28, className = "" }: { size?: number, className?
 const WhatsAppFab = () => {
   return (
     <a
-      href="https://wa.me/918848300000"
+      href="https://wa.me/917907140006"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"

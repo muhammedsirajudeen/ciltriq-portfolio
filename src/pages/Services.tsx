@@ -1,44 +1,68 @@
 import {
-  Bot, Smartphone, Globe, MessageSquare, TrendingUp, Layers,
-  Check, ArrowRight
+  Bot,
+  Smartphone,
+  Globe,
+  MessageSquare,
+  Database,
+  Layers,
+  Check,
+  ArrowRight,
 } from "lucide-react";
+
 import { BlurFade } from "@/components/ui/blur-fade";
 import { MagicCard } from "@/components/ui/magic-card";
 import { GridPattern } from "@/components/ui/grid-pattern";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 import { Link } from "react-router-dom";
 
 const services = [
   {
-    icon: Bot, title: "AI Business Automation", color: "text-primary",
-    desc: "Deploy intelligent bots across WhatsApp, Instagram, email, and SMS. Automate customer support, lead qualification, and follow-ups 24/7.",
-    tags: ["WhatsApp API", "Meta Integration", "24/7 Active"],
+    icon: Globe,
+    title: "Web Development",
+    color: "text-primary",
+    desc:
+      "Fast, scalable websites and web platforms built with modern technologies and clean architecture.",
+    tags: ["Next.js", "React", "Full Stack"],
   },
   {
-    icon: Smartphone, title: "App Development", color: "text-ctext-primary",
-    desc: "iOS, Android, and cross-platform apps that users love. From MVP to enterprise-scale.",
-    tags: ["Flutter", "React Native", "Swift"],
+    icon: Smartphone,
+    title: "Mobile App Development",
+    color: "text-primary",
+    desc:
+      "Cross-platform and native mobile applications designed for performance and real-world usage.",
+    tags: ["React Native", "Flutter", "iOS & Android"],
   },
   {
-    icon: Globe, title: "Web Development", color: "text-ctext-primary",
-    desc: "High-performance websites and full-stack platforms built on modern architecture.",
-    tags: ["Next.js", "Full Stack", "SEO Ready"],
+    icon: Bot,
+    title: "AI Integrations",
+    color: "text-primary",
+    desc:
+      "Integrate AI into your existing workflows, products, and internal tools to reduce manual work.",
+    tags: ["OpenAI", "Automation", "Custom Workflows"],
   },
   {
-    icon: MessageSquare, title: "AI Chatbots", color: "text-primary",
-    desc: "Custom GPT-powered bots trained on your business data to handle queries, bookings, and sales.",
-    tags: ["GPT-4", "Custom Trained", "Multi-language"],
+    icon: MessageSquare,
+    title: "Chatbot Systems",
+    color: "text-primary",
+    desc:
+      "Custom chatbot solutions for customer support, lead handling, and business operations.",
+    tags: ["WhatsApp", "GPT", "Multi-language"],
   },
   {
-    icon: TrendingUp, title: "Revenue Leak Analysis", color: "text-secondary",
-    desc: "We audit your business workflows, find where money is slipping away, and fix it systematically.",
-    tags: ["Free Audit", "ROI Focused"],
+    icon: Database,
+    title: "Backend Systems",
+    color: "text-primary",
+    desc:
+      "Reliable APIs, databases, authentication systems, and infrastructure for scalable products.",
+    tags: ["APIs", "Databases", "Cloud"],
   },
   {
-    icon: Layers, title: "Multi-Channel Automation", color: "text-ctext-primary",
-    desc: "Unified campaigns across WhatsApp, email, SMS, and social -- all triggered by customer behavior.",
-    tags: ["Email", "WhatsApp", "SMS"],
+    icon: Layers,
+    title: "Internal Tools",
+    color: "text-primary",
+    desc:
+      "Dashboards, admin panels, and operational software tailored to your business workflows.",
+    tags: ["Dashboards", "Admin Panels", "Automation"],
   },
 ];
 
@@ -47,15 +71,21 @@ const Services = () => {
     <main className="pt-24 pb-20">
       <section className="relative overflow-hidden py-16 lg:py-24">
         <GridPattern strokeColor="rgba(0,0,0,0.04)" />
+
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <BlurFade>
             <div className="text-center mb-16">
-              <span className="font-body text-xs uppercase tracking-widest text-primary font-medium">What We Do</span>
+              <span className="font-body text-xs uppercase tracking-widest text-primary font-medium">
+                Services
+              </span>
+
               <h1 className="font-heading text-4xl lg:text-5xl font-bold text-ctext-primary mt-3 mb-4">
-                Solutions Built for Real Business Problems
+                Software Built Around Your Business
               </h1>
-              <p className="font-body text-ctext-secondary max-w-xl mx-auto">
-                From idea to deployment, we handle every layer of your technology needs
+
+              <p className="font-body text-ctext-secondary max-w-2xl mx-auto">
+                We design and build software systems — from websites and mobile
+                apps to AI tools and internal platforms.
               </p>
             </div>
           </BlurFade>
@@ -64,12 +94,26 @@ const Services = () => {
             {services.map((service, i) => (
               <BlurFade key={service.title} delay={0.1 * i}>
                 <MagicCard className="h-full">
-                  <service.icon size={48} strokeWidth={1.5} className={service.color} />
-                  <h3 className="font-heading font-semibold text-xl text-ctext-primary mt-4 mb-3">{service.title}</h3>
-                  <p className="font-body text-sm text-ctext-secondary mb-4">{service.desc}</p>
+                  <service.icon
+                    size={48}
+                    strokeWidth={1.5}
+                    className={"text-black"}
+                  />
+
+                  <h3 className="font-heading font-semibold text-xl text-ctext-primary mt-4 mb-3">
+                    {service.title}
+                  </h3>
+
+                  <p className="font-body text-sm text-ctext-secondary mb-4 leading-relaxed">
+                    {service.desc}
+                  </p>
+
                   <div className="flex flex-wrap gap-2">
                     {service.tags.map((tag) => (
-                      <span key={tag} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-body font-medium">
+                      <span
+                        key={tag}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-body font-medium"
+                      >
                         <Check size={12} strokeWidth={2} />
                         {tag}
                       </span>
@@ -85,7 +129,11 @@ const Services = () => {
               <Link to="/contact">
                 <RainbowButton className="text-base px-8 py-4">
                   Start a Project
-                  <ArrowRight size={20} strokeWidth={1.5} className="ml-2" />
+                  <ArrowRight
+                    size={20}
+                    strokeWidth={1.5}
+                    className="ml-2"
+                  />
                 </RainbowButton>
               </Link>
             </div>
