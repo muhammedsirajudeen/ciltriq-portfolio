@@ -2,6 +2,7 @@
 
 import { ArrowUpRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import Image from "next/image";
 
 type Project = {
   title: string;
@@ -204,8 +205,7 @@ const projects: Project[] = [
 
 ];
 
-export default function Projects() {
-  const [activeType, setActiveType] = useState<"client" | "partnership">("client");
+export default function PortfolioPage() {
   const [activePlatform, setActivePlatform] = useState<"all" | "web" | "mobile" | "automation">("all");
 
   const [visible, setVisible] = useState<boolean[]>([]);
@@ -243,14 +243,8 @@ export default function Projects() {
     return platformMatch;
   });
 
-  const stats = [
-    { label: "Total projects", value: projects.length },
-    { label: "Live platforms", value: projects.filter((p) => p.live_link).length },
-    { label: "Industries", value: new Set(projects.map((p) => p.industry)).size },
-  ];
-
   return (
-    <section id="projects" className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
+    <section id="projects" className="py-24 sm:py-28 lg:py-32 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
 
         {/* PLATFORM FILTER */}
@@ -280,7 +274,9 @@ export default function Projects() {
             filteredProjects.map((project, i) => (
               <div
                 key={i}
-                ref={(el) => (refs.current[i] = el)}
+                ref={(el) => {
+                  refs.current[i] = el;
+                }}
                 className={`rounded-2xl border bg-background overflow-hidden transition-all duration-700 ${visible[i] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                   }`}
               >
@@ -290,14 +286,17 @@ export default function Projects() {
                   <div className="relative overflow-hidden border-b lg:border-b-0 lg:border-r border-border min-h-[200px] sm:min-h-[240px]">
 
                     {/* DESKTOP */}
-                    <img
-                      src={project.desktop_image}
-                      alt={`${project.title} desktop`}
-                      className={`w-full h-full object-cover object-top-left transition-all duration-700 ${visible[i]
+                    <div className={`w-full h-full relative transition-all duration-700 ${visible[i]
                         ? "scale-[0.92] opacity-100"
                         : "scale-[0.85] opacity-0"
-                        }`}
+                        }`}>
+                    <Image
+                      src={project.desktop_image}
+                      alt={`${project.title} desktop`}
+                      fill
+                      className="object-cover object-top-left"
                     />
+                    </div>
 
                     {/* MOBILE */}
                     <div
@@ -306,9 +305,11 @@ export default function Projects() {
                         : "translate-x-12 opacity-0"
                         }`}
                     >
-                      <img
+                      <Image
                         src={project.mobile_image}
                         alt={`${project.title} mobile`}
+                        width={256}
+                        height={512}
                         className="w-full h-auto object-contain"
                       />
                     </div>
@@ -323,11 +324,12 @@ export default function Projects() {
                   >
                     <div>
                       <div className="flex items-center gap-3 mb-4 sm:mb-5">
-                        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg border border-border overflow-hidden flex-shrink-0 bg-muted">
-                          <img
+                        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg border border-border overflow-hidden flex-shrink-0 bg-muted relative">
+                          <Image
                             src={project.icon}
                             alt={`${project.title} icon`}
-                            className="w-full h-full object-cover"
+                            fill
+                            className="object-cover"
                           />
                         </div>
                         <div>

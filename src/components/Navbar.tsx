@@ -1,5 +1,8 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { RainbowButton } from "@/components/ui/rainbow-button";
@@ -16,7 +19,7 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const location = useLocation();
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -26,7 +29,7 @@ const Navbar = () => {
 
   useEffect(() => {
     setIsOpen(false);
-  }, [location]);
+  }, [pathname]);
 
   return (
     <nav
@@ -37,7 +40,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <Link to="/" className="flex items-center gap-1.5">
+          <Link href="/" className="flex items-center gap-1.5">
             <span className="font-heading font-bold text-xl text-gradient">Ciltriq</span>
             <span className="font-body text-sm text-ctext-muted">Technologies</span>
           </Link>
@@ -46,10 +49,10 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <Link
                 key={link.path}
-                to={link.path}
+                href={link.path}
                 className={cn(
                   "font-body text-sm transition-colors duration-200",
-                  location.pathname === link.path
+                  pathname === link.path
                     ? "text-primary font-medium"
                     : "text-ctext-secondary hover:text-primary"
                 )}
@@ -60,7 +63,7 @@ const Navbar = () => {
           </div>
 
           <div className="hidden lg:block">
-            <Link to="/contact">
+            <Link href="/contact">
               <RainbowButton className="text-xs">
                 Get Free Consultation
                 <ArrowRight size={16} strokeWidth={1.5} />
@@ -84,10 +87,10 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <Link
                 key={link.path}
-                to={link.path}
+                href={link.path}
                 className={cn(
                   "block font-body text-base py-2 transition-colors",
-                  location.pathname === link.path
+                  pathname === link.path
                     ? "text-primary font-medium"
                     : "text-ctext-secondary"
                 )}
@@ -95,7 +98,7 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link to="/contact" className="block pt-2">
+            <Link href="/contact" className="block pt-2">
               <RainbowButton className="w-full text-sm">
                 Get Free Consultation
                 <ArrowRight size={16} strokeWidth={1.5} />
@@ -109,3 +112,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

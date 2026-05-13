@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { Phone, MapPin } from "lucide-react";
 
 import {
@@ -97,7 +99,7 @@ const Footer = () => {
               {footerServices.map((service) => (
                 <li key={service}>
                   <Link
-                    to="/services"
+                    href="/services"
                     className="font-body text-sm text-white/60 transition-colors hover:text-white"
                   >
                     {service}
@@ -116,7 +118,7 @@ const Footer = () => {
               {footerCompany.map((item) => (
                 <li key={item.label}>
                   <Link
-                    to={item.path}
+                    href={item.path}
                     className="font-body text-sm text-white/60 transition-colors hover:text-white"
                   >
                     {item.label}
@@ -125,6 +127,7 @@ const Footer = () => {
               ))}
             </ul>
           </div>
+
 
           <div>
             <h4 className="mb-4 font-heading text-sm font-semibold uppercase tracking-wide text-white">

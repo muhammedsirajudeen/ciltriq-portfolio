@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Bot,
   Smartphone,
@@ -13,7 +15,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { MagicCard } from "@/components/ui/magic-card";
 import { GridPattern } from "@/components/ui/grid-pattern";
 import { RainbowButton } from "@/components/ui/rainbow-button";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const services = [
   {
@@ -66,7 +68,7 @@ const services = [
   },
 ];
 
-const Services = () => {
+export default function ServicesPage() {
   return (
     <main className="pt-24 pb-20">
       <section className="relative overflow-hidden py-16 lg:py-24">
@@ -126,7 +128,7 @@ const Services = () => {
 
           <BlurFade delay={0.8}>
             <div className="text-center mt-14">
-              <Link to="/contact">
+              <Link href="/contact">
                 <RainbowButton className="text-base px-8 py-4">
                   Start a Project
                   <ArrowRight
@@ -142,6 +144,4 @@ const Services = () => {
       </section>
     </main>
   );
-};
-
-export default Services;
+}

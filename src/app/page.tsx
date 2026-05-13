@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import {
   BadgeCheck,
   Users,
@@ -172,7 +174,7 @@ const HeroSection = () => (
 
       <BlurFade delay={0.5}>
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4 mb-12 w-full max-w-xs sm:max-w-none mx-auto">
-          <Link to="/portfolio" className="w-full sm:w-auto">
+          <Link href="/portfolio" className="w-full sm:w-auto">
             <RainbowButton className="w-full">
               <FolderKanban
                 size={20}
@@ -183,7 +185,7 @@ const HeroSection = () => (
             </RainbowButton>
           </Link>
 
-          <Link to="/contact" className="w-full sm:w-auto">
+          <Link href="/contact" className="w-full sm:w-auto">
             <ShimmerButton variant="secondary" className="w-full">
               Start a Project
               <ArrowRight size={20} strokeWidth={1.5} />
@@ -282,7 +284,7 @@ const ServicesPreview = () => (
 
       <BlurFade delay={0.7}>
         <div className="text-center mt-10">
-          <Link to="/services">
+          <Link href="/services">
             <ShimmerButton variant="secondary">
               View All Services
               <ArrowRight size={16} strokeWidth={1.5} />
@@ -337,7 +339,7 @@ const CTASection = () => (
               We can help you design, build, and scale it.
             </p>
 
-            <Link to="/contact" className="block w-full sm:w-auto mt-4">
+            <Link href="/contact" className="block w-full sm:w-auto mt-4">
               <RainbowButton className="text-base px-8 py-4 w-full sm:w-auto">
                 Start a Project
 
@@ -355,7 +357,7 @@ const CTASection = () => (
   </section>
 );
 
-const Index = () => {
+export default function Home() {
   return (
     <main>
       <HeroSection />
@@ -364,6 +366,4 @@ const Index = () => {
       <CTASection />
     </main>
   );
-};
-
-export default Index;
+}

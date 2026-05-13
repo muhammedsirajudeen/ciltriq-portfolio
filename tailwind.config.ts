@@ -128,6 +128,18 @@ export default {
           "0%, 100%": { borderColor: "transparent" },
           "50%": { borderColor: "#2563EB" },
         },
+        rainbow: {
+          "0%": { "background-position": "0%" },
+          "100%": { "background-position": "200%" },
+        },
+        meteor: {
+          "0%": { transform: "rotate(var(--angle)) translateX(0)", opacity: "1" },
+          "70%": { opacity: "1" },
+          "100%": {
+            transform: "rotate(var(--angle)) translateX(-500px)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -144,6 +156,8 @@ export default {
         "shine-border": "shine-border 3s ease-in-out infinite",
         typing: "typing 3s steps(60) forwards",
         blink: "blink 0.7s step-end infinite",
+        rainbow: "rainbow var(--speed, 2s) infinite linear",
+        meteor: "meteor 5s linear infinite",
       },
     },
   },

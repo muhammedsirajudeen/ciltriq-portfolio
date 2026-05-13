@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Bot, ArrowRight, Zap, MessageSquare, TrendingUp, Check,
   PenTool, Code2, GitBranch, BarChart2
@@ -7,7 +9,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { DotPattern } from "@/components/ui/dot-pattern";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { MagicCard } from "@/components/ui/magic-card";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { AnimatedBeamAutomation } from "@/components/AnimatedBeamAutomation";
 import { RainbowButton } from "@/components/ui/rainbow-button";
 
@@ -40,7 +42,7 @@ const processSteps = [
   { icon: BarChart2, title: "Scale", desc: "We monitor, optimize, and scale your product as your business grows", color: "text-secondary" },
 ];
 
-const Automation = () => {
+export default function AutomationPage() {
   return (
     <main className="pt-24 pb-20">
       {/* AI Automation Feature */}
@@ -76,7 +78,7 @@ const Automation = () => {
                 </ul>
               </BlurFade>
               <BlurFade delay={0.4}>
-                <Link to="/contact">
+                <Link href="/contact">
                   <RainbowButton>
                     <Bot size={20} strokeWidth={1.5} className="mr-2" />
                     Automate My Business
@@ -140,6 +142,4 @@ const Automation = () => {
       </section>
     </main>
   );
-};
-
-export default Automation;
+}

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import {
   User,
@@ -26,7 +28,7 @@ const businessTypes = [
   "Other",
 ];
 
-const Contact = () => {
+export default function ContactPage() {
   const [form, setForm] = useState({
     name: "",
     whatsapp: "",
@@ -219,6 +221,4 @@ I would like to discuss this further.`;
       </section>
     </main>
   );
-};
-
-export default Contact;
+}
