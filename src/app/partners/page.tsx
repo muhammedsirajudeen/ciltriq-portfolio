@@ -1,120 +1,79 @@
-"use client";
+import PartnersPage from "./partners.page";
+import type { Metadata } from "next";
 
-import {
-  Building2,
-  Users,
-  HeartPulse,
-  ShoppingCart,
-  GraduationCap,
-  Home,
-  Package,
-} from "lucide-react";
+export const metadata: Metadata = {
+  title:
+    "Companies & Industries We Work With | Ciltriq Technologies",
 
-import { Handshake } from "@phosphor-icons/react";
+  description:
+    "Explore the companies, startups, and industries Ciltriq Technologies has collaborated with across software systems, operational platforms, automation workflows, and digital products.",
 
-import { BlurFade } from "@/components/ui/blur-fade";
-import { Marquee } from "@/components/ui/marquee";
+  keywords: [
+    "software development partners",
+    "technology consulting",
+    "AI automation company",
+    "business software solutions",
+    "custom software agency",
+    "startup technology partner",
+    "operational systems development",
+    "Healthcare software",
+    "Retail software solutions",
+    "Education technology",
+    "Logistics software",
+    "Real Estate platforms",
+    "Ciltriq Technologies",
+  ],
 
-const partners = [
-  "Knowbin Technologies",
-  "Toobikes",
-  "Asairz",
-  "Dibolky",
-  "Bodha",
-];
+  metadataBase: new URL("https://ciltriq.com"),
 
-const industries = [
-  { name: "Healthcare", Icon: HeartPulse },
-  { name: "Retail", Icon: ShoppingCart },
-  { name: "Education", Icon: GraduationCap },
-  { name: "Real Estate", Icon: Home },
-  { name: "Logistics", Icon: Package },
-];
+  alternates: {
+    canonical: "/partners",
+  },
 
-export default function PartnersPage() {
-  return (
-    <main className="pt-24 pb-20">
-      <section className="surface-bg py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <BlurFade>
-            <div className="mb-12 text-center">
-              <Handshake size={32} className="mx-auto mb-3 text-primary" />
+  openGraph: {
+    title:
+      "Companies & Industries We Work With | Ciltriq Technologies",
 
-              <h1 className="mb-3 font-heading text-3xl font-semibold text-ctext-primary lg:text-4xl">
-                Companies We Work With
-              </h1>
+    description:
+      "See the businesses and industries Ciltriq Technologies has collaborated with across scalable software systems, platforms, and operational tools.",
 
-              <p className="font-body text-ctext-secondary">
-                Businesses and teams we have collaborated with across products,
-                platforms, and operational systems.
-              </p>
-            </div>
-          </BlurFade>
+    url: "https://ciltriq.com/partners",
 
-          <Marquee speed="45s" className="mb-20">
-            {partners.map((name) => (
-              <div
-                key={name}
-                className="mx-3 flex items-center gap-3 rounded-2xl border border-border bg-white px-6 py-4 shadow-sm whitespace-nowrap"
-              >
-                <Building2
-                  size={22}
-                  strokeWidth={1.5}
-                  className="text-ctext-primary"
-                />
+    siteName: "Ciltriq Technologies",
 
-                <div>
-                  <p className="font-body text-sm font-medium text-ctext-primary">
-                    {name}
-                  </p>
+    locale: "en_US",
 
-                  <p className="font-body text-xs text-ctext-muted">
-                    Collaboration Partner
-                  </p>
-                </div>
-              </div>
-            ))}
-          </Marquee>
+    type: "website",
 
-          <BlurFade>
-            <div className="mb-12 text-center">
-              <Users
-                size={32}
-                strokeWidth={1.5}
-                className="mx-auto mb-3 text-secondary"
-              />
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Companies and industries working with Ciltriq Technologies",
+      },
+    ],
+  },
 
-              <h2 className="mb-3 font-heading text-3xl font-semibold text-ctext-primary lg:text-4xl">
-                Industry Experience
-              </h2>
+  twitter: {
+    card: "summary_large_image",
 
-              <p className="mx-auto max-w-2xl font-body text-ctext-secondary">
-                Experience building systems and software solutions across
-                multiple operational domains.
-              </p>
-            </div>
-          </BlurFade>
+    title:
+      "Companies & Industries We Work With | Ciltriq Technologies",
 
-          <BlurFade delay={0.15}>
-            <div className="mb-16 flex flex-wrap justify-center gap-3">
-              {industries.map((industry) => (
-                <span
-                  key={industry.name}
-                  className="inline-flex items-center gap-2 rounded-full border border-border bg-white px-5 py-2.5 font-body text-sm shadow-sm"
-                >
-                  <industry.Icon
-                    size={16}
-                    strokeWidth={1.5}
-                    className="text-ctext-secondary"
-                  />
+    description:
+      "Businesses and operational domains Ciltriq Technologies has collaborated with across software, platforms, and automation systems.",
 
-                  {industry.name}
-                </span>
-              ))}
-            </div>
-          </BlurFade>
-        </div>
-      </section>
-    </main>
-  );
+    images: ["/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+export default function Page(){
+  return(
+    <PartnersPage/>
+  )
 }
