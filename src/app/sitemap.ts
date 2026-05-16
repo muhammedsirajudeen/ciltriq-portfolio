@@ -10,6 +10,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/automation",
     "/partners",
     "/contact",
+
+    // BLOGS
+    "/blog/how-to-choose-a-software-development-company-in-kerala",
   ];
 
   return routes.map((route) => ({
@@ -20,12 +23,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ? "weekly"
         : route === "/portfolio"
           ? "weekly"
-          : "monthly",
+          : route.startsWith("/blog")
+            ? "monthly"
+            : "monthly",
     priority:
       route === ""
         ? 1
         : route === "/portfolio"
           ? 0.9
-          : 0.8,
+          : route.startsWith("/blog")
+            ? 0.85
+            : 0.8,
   }));
 }
