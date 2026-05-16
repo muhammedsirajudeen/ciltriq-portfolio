@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import WhatsAppFab from "@/components/WhatsAppFab";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ciltriq.com"),
@@ -108,6 +109,7 @@ export default function RootLayout({
       <body className="antialiased">
         <Providers>
           <Navbar />
+          <Analytics/>
           <ScrollProgress className="top-16 lg:top-20 z-50 opacity-60" />
           <main>{children}</main>
           <Footer />
