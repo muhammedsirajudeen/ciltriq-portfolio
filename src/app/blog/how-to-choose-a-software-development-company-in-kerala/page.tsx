@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "Ciltriq Technologies",
     images: [
       {
-        url: "/blog/software-company-og.png",
+        url: "/blog/og-images/software-company-og.png",
         width: 1600,
         height: 900,
         alt: "How to Choose a Good Software Development Company in Kerala",
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       "How to Choose a Good Software Development Company in Kerala (2026 Guide)",
     description:
       "A practical guide for businesses looking to hire a software development company in Kerala.",
-    images: ["/blog/software-company-og.png"],
+    images: ["/blog/og-images/software-company-og.png"],
   },
 };
 
@@ -60,7 +60,7 @@ export default function BlogPage() {
       },
     },
     image:
-      "https://ciltriq.com/blog/software-company-og.png",
+      "https://ciltriq.com/blog/og-images/software-company-og.png",
     mainEntityOfPage:
       "https://ciltriq.com/blog/how-to-choose-a-good-software-development-company-in-kerala",
   };
