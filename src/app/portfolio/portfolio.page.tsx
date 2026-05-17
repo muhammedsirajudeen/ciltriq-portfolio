@@ -42,7 +42,7 @@ const projects: Project[] = [
     mobile_image: "/asairz_mobile.png",
     desktop_image: "/asairz_desktop.png",
     icon: "/asairz_icon.png",
-    live_link: "https://ciltriq.asairz.com",
+    live_link: "https://asairz.ciltriq.com",
     year: "2026",
     industry: "Ecommerce",
     completed: false,
@@ -85,7 +85,7 @@ const projects: Project[] = [
     mobile_image: "/kannurgardens_mobile.png",
     desktop_image: "/kannurgardens_desktop.png",
     icon: "/kannurgardens_icon.png",
-    live_link: "https://kannurgardens.vercel.app",
+    live_link: "https://www.kannurgardens.com",
     year: "2026",
     industry: "Hospitality",
     completed: true,
@@ -127,7 +127,7 @@ const projects: Project[] = [
     mobile_image: "/nadancurrychatti_mobile.png",
     desktop_image: "/nadancurrychatti_desktop.png",
     icon: "/cq_icon.png",
-    live_link: "https://www.kasaragodsportscity.com/",
+    live_link: "https://nadancurrychatti.com",
     year: "2026",
     industry: "Food & Hospitality",
     completed: true,
@@ -141,7 +141,7 @@ const projects: Project[] = [
     mobile_image: "/zukomi_mobile.png",
     desktop_image: "/zukomi_desktop.png",
     icon: "/zukomi_icon.png",
-    live_link: "https://www.zukomi.com/",
+    live_link: "https://www.zukomi.com",
     year: "2026",
     industry: "EdTech",
     completed: true,
@@ -169,7 +169,7 @@ const projects: Project[] = [
     mobile_image: "/bodha_mobile.png",
     desktop_image: "/bodha_desktop.png",
     icon: "/cq_icon.png",
-    live_link: "https://wa.me/918590291351",
+    live_link: "https://bodha.ciltriq.com",
     year: "2026",
     industry: "Healthcare & AI",
     completed: false,
@@ -287,15 +287,15 @@ export default function PortfolioPage() {
 
                     {/* DESKTOP */}
                     <div className={`w-full h-full relative transition-all duration-700 ${visible[i]
-                        ? "scale-[0.92] opacity-100"
-                        : "scale-[0.85] opacity-0"
-                        }`}>
-                    <Image
-                      src={project.desktop_image}
-                      alt={`${project.title} desktop`}
-                      fill
-                      className="object-cover object-top-left"
-                    />
+                      ? "scale-[0.92] opacity-100"
+                      : "scale-[0.85] opacity-0"
+                      }`}>
+                      <Image
+                        src={project.desktop_image}
+                        alt={`${project.title} desktop`}
+                        fill
+                        className="object-cover object-top-left"
+                      />
                     </div>
 
                     {/* MOBILE */}
