@@ -1,21 +1,8 @@
 "use client";
 
-import {
-  ArrowUpRight,
-  Globe,
-  Smartphone,
-  Bot,
-  ArrowRight,
-  Layers,
-  Briefcase,
-} from "lucide-react";
-import { useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
-
-import { BlurFade } from "@/components/ui/blur-fade";
-import { DotPattern } from "@/components/ui/dot-pattern";
-import { RainbowButton } from "@/components/ui/rainbow-button";
 
 type Project = {
   title: string;
@@ -28,7 +15,7 @@ type Project = {
   live_link: string;
   year: string;
   industry: string;
-  completed: boolean;
+  completed: boolean
 };
 
 const projects: Project[] = [
@@ -74,6 +61,7 @@ const projects: Project[] = [
     industry: "Transport & Mobility",
     completed: true,
   },
+
   {
     title: "Digital Nomads Kerala",
     description:
@@ -195,8 +183,7 @@ const projects: Project[] = [
     mobile_image: "/lifepartneragain_mobile.png",
     desktop_image: "/lifepartneragain_desktop.png",
     icon: "/lifepartneragain_icon.png",
-    live_link:
-      "https://play.google.com/store/apps/details?id=com.ciltriq.arikil&hl=en_IN",
+    live_link: "https://play.google.com/store/apps/details?id=com.ciltriq.arikil&hl=en_IN",
     year: "2026",
     industry: "Social & Relationships",
     completed: false,
@@ -210,295 +197,200 @@ const projects: Project[] = [
     mobile_image: "/arikil_mobile.png",
     desktop_image: "/arikil_desktop.png",
     icon: "/arikil_icon.png",
-    live_link:
-      "https://play.google.com/store/apps/details?id=com.ciltriq.arikil&hl=en_IN",
+    live_link: "https://play.google.com/store/apps/details?id=com.ciltriq.arikil&hl=en_IN",
     year: "2026",
     industry: "Consumer AI",
     completed: true,
   },
-];
 
-const platformFilters = [
-  { key: "all" as const, label: "All", icon: Layers },
-  { key: "web" as const, label: "Web", icon: Globe },
-  { key: "mobile" as const, label: "App", icon: Smartphone },
-  { key: "automation" as const, label: "Automation", icon: Bot },
 ];
 
 export default function PortfolioPage() {
-  const [activePlatform, setActivePlatform] = useState<
-    "all" | "web" | "mobile" | "automation"
-  >("all");
+  const [activePlatform, setActivePlatform] = useState<"all" | "web" | "mobile" | "automation">("all");
 
-  const filteredProjects = projects.filter(
-    (p) => activePlatform === "all" || p.platform === activePlatform
-  );
+  const [visible, setVisible] = useState<boolean[]>([]);
+  const refs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const completedCount = projects.filter((p) => p.completed).length;
-  const inProgressCount = projects.filter((p) => !p.completed).length;
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    refs.current.forEach((el, index) => {
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisible((prev) => {
+              const copy = [...prev];
+              copy[index] = true;
+              return copy;
+            });
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.2 }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  const filteredProjects = projects.filter((p) => {
+    const platformMatch = activePlatform === "all" || p.platform === activePlatform;
+    return platformMatch;
+  });
 
   return (
-    <main className="pt-24 pb-20">
-      {/* ─── PAGE HEADER ─── */}
-      <section className="relative overflow-hidden py-16 lg:py-24">
-        <DotPattern dotColor="rgba(37,99,235,0.07)" />
+    <section id="projects" className="py-24 sm:py-28 lg:py-32 px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <BlurFade>
-            <div className="text-center mb-10">
-              <span className="font-body text-xs uppercase tracking-widest text-primary font-medium">
-                Portfolio
-              </span>
-
-              <h1 className="font-heading text-4xl lg:text-5xl font-bold text-ctext-primary mt-3 mb-4">
-                Work That Speaks for Itself
-              </h1>
-
-              <p className="font-body text-ctext-secondary max-w-2xl mx-auto">
-                Real software systems built for real businesses — from SaaS
-                platforms and ecommerce stores to AI tools and automation
-                workflows.
-              </p>
-            </div>
-          </BlurFade>
-
-          {/* Summary pills */}
-          <BlurFade delay={0.15}>
-            <div className="flex items-center justify-center gap-3 sm:gap-4 mb-10">
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white border card-shadow font-body text-sm">
-                <span className="font-heading font-bold text-ctext-primary">
-                  {projects.length}
-                </span>
-                <span className="text-ctext-muted">Projects</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white border card-shadow font-body text-sm">
-                <div className="w-2 h-2 rounded-full bg-secondary" />
-                <span className="font-heading font-bold text-ctext-primary">
-                  {completedCount}
-                </span>
-                <span className="text-ctext-muted">Delivered</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-white border card-shadow font-body text-sm">
-                <div className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
-                <span className="font-heading font-bold text-ctext-primary">
-                  {inProgressCount}
-                </span>
-                <span className="text-ctext-muted">In Progress</span>
-              </div>
-            </div>
-          </BlurFade>
-
-          {/* Platform Filter */}
-          <BlurFade delay={0.25}>
-            <div className="flex gap-2 flex-wrap items-center justify-center">
-              {platformFilters.map((filter) => (
-                <button
-                  key={filter.key}
-                  onClick={() => setActivePlatform(filter.key)}
-                  className={`group inline-flex items-center gap-2 px-4 py-2 text-sm rounded-full border transition-all duration-300 font-body font-medium ${
-                    activePlatform === filter.key
-                      ? "bg-foreground text-background border-foreground"
-                      : "bg-white text-ctext-secondary border-border hover:border-foreground/30 card-shadow"
-                  }`}
-                >
-                  <filter.icon
-                    size={15}
-                    strokeWidth={1.5}
-                    className={
-                      activePlatform === filter.key
-                        ? "text-background"
-                        : "text-ctext-muted group-hover:text-ctext-primary transition-colors"
-                    }
-                  />
-                  {filter.label}
-                </button>
-              ))}
-            </div>
-          </BlurFade>
+        {/* PLATFORM FILTER */}
+        <div className="flex gap-2 flex-wrap items-center">
+          <span className="text-xs uppercase tracking-widest text-muted-foreground mr-1">
+            Platform
+          </span>
+          {(["all", "web", "mobile", "automation"] as const).map((platform) => (
+            <button
+              key={platform}
+              onClick={() => setActivePlatform(platform)}
+              className={`px-3 sm:px-4 py-1.5 text-xs sm:text-sm rounded-full border transition ${activePlatform === platform
+                ? "bg-foreground text-background border-foreground"
+                : "bg-transparent text-muted-foreground border-border hover:border-foreground/40"
+                }`}
+            >
+              {platform.charAt(0).toUpperCase() + platform.slice(1)}
+            </button>
+          ))}
         </div>
-      </section>
 
-      {/* ─── PROJECTS ─── */}
-      <section className="relative py-4 sm:py-8 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto space-y-8 sm:space-y-10">
+        <hr className="border-border" />
+
+        {/* PROJECTS */}
+        <div className="space-y-6">
           {filteredProjects.length > 0 ? (
             filteredProjects.map((project, i) => (
-              <BlurFade
-                key={`${activePlatform}-${project.title}`}
-                delay={0.06 * i}
+              <div
+                key={i}
+                ref={(el) => {
+                  refs.current[i] = el;
+                }}
+                className={`rounded-2xl border bg-background overflow-hidden transition-all duration-700 ${visible[i] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                  }`}
               >
-                <div className="group rounded-2xl border bg-white overflow-hidden transition-all duration-500 hover:shadow-lg hover:border-primary/15">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[280px] sm:min-h-[320px] lg:min-h-[380px]">
-                    {/* ── IMAGE SIDE ── */}
-                    <div className="relative overflow-hidden border-b lg:border-b-0 lg:border-r border-border min-h-[220px] sm:min-h-[260px] bg-gradient-to-br from-slate-50 to-blue-50/20">
-                      {/* Desktop screenshot */}
-                      <div className="w-full h-full relative transition-transform duration-700 scale-[0.92] group-hover:scale-[0.94]">
-                        <Image
-                          src={project.desktop_image}
-                          alt={`${project.title} desktop`}
-                          fill
-                          className="object-cover object-top-left rounded-md"
-                        />
-                      </div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[280px] sm:min-h-[320px] lg:min-h-[360px]">
 
-                      {/* Mobile screenshot */}
-                      <div className="absolute bottom-12 sm:bottom-16 lg:bottom-14 right-[-10px] sm:right-[-30px] lg:right-[-40px] w-24 sm:w-36 md:w-44 lg:w-52 transition-transform duration-700 group-hover:translate-x-[-6px] group-hover:-translate-y-1">
-                        <Image
-                          src={project.mobile_image}
-                          alt={`${project.title} mobile`}
-                          width={256}
-                          height={512}
-                          className="w-full h-auto object-contain drop-shadow-xl"
-                        />
-                      </div>
+                  {/* VISUAL SIDE */}
+                  <div className="relative overflow-hidden border-b lg:border-b-0 lg:border-r border-border min-h-[200px] sm:min-h-[240px]">
 
-                      {/* Platform badge */}
-                      <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 backdrop-blur-sm border border-white/50 shadow-sm">
-                        {project.platform === "web" && (
-                          <Globe
-                            size={12}
-                            strokeWidth={1.5}
-                            className="text-primary"
-                          />
-                        )}
-                        {project.platform === "mobile" && (
-                          <Smartphone
-                            size={12}
-                            strokeWidth={1.5}
-                            className="text-primary"
-                          />
-                        )}
-                        {project.platform === "automation" && (
-                          <Bot
-                            size={12}
-                            strokeWidth={1.5}
-                            className="text-primary"
-                          />
-                        )}
-                        <span className="font-body text-[10px] font-medium text-ctext-secondary uppercase tracking-wide">
-                          {project.platform === "mobile" ? "App" : project.platform}
-                        </span>
-                      </div>
+                    {/* DESKTOP */}
+                    <div className={`w-full h-full relative transition-all duration-700 ${visible[i]
+                      ? "scale-[0.92] opacity-100"
+                      : "scale-[0.85] opacity-0"
+                      }`}>
+                      <Image
+                        src={project.desktop_image}
+                        alt={`${project.title} desktop`}
+                        fill
+                        className="object-cover object-top-left"
+                      />
                     </div>
 
-                    {/* ── CONTENT SIDE ── */}
-                    <div className="p-5 sm:p-6 lg:p-8 flex flex-col justify-between">
-                      <div>
-                        {/* Icon + meta */}
-                        <div className="flex items-center gap-3 mb-4">
-                          <div className="w-9 h-9 rounded-xl border border-border overflow-hidden flex-shrink-0 bg-muted relative">
-                            <Image
-                              src={project.icon}
-                              alt={`${project.title} icon`}
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          <span className="font-body text-[11px] text-ctext-muted uppercase tracking-wider">
-                            {project.industry} · {project.year}
-                          </span>
-                        </div>
-
-                        {/* Title */}
-                        <h3 className="font-heading text-xl sm:text-2xl font-bold tracking-tight text-ctext-primary mb-3">
-                          {project.title}
-                        </h3>
-
-                        {/* Description */}
-                        <p className="font-body text-ctext-secondary text-xs sm:text-sm leading-relaxed mb-5">
-                          {project.description}
-                        </p>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-2 mb-6">
-                          {project.tags.map((tag, idx) => (
-                            <span
-                              key={idx}
-                              className="font-body text-[11px] px-2.5 py-1 rounded-full border bg-slate-50 text-ctext-secondary"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* CTA */}
-                      <div className="flex items-center gap-3">
-                        {project.completed ? (
-                          <a
-                            href={project.live_link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="group/btn inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-foreground text-background text-sm font-medium font-body transition-all hover:opacity-90"
-                          >
-                            <span>View Live</span>
-                            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white text-foreground text-xs transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5">
-                              <ArrowUpRight className="h-3.5 w-3.5" />
-                            </span>
-                          </a>
-                        ) : (
-                          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200/60 text-sm font-medium font-body">
-                            <div className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
-                            In Progress
-                          </div>
-                        )}
-                      </div>
+                    {/* MOBILE */}
+                    <div
+                      className={`absolute bottom-16 sm:bottom-16 lg:bottom-16 right-[-20px] sm:right-[-40px] lg:right-[-60px] w-28 sm:w-40 md:w-52 lg:w-64 transition-all duration-700 delay-150 ${visible[i]
+                        ? "translate-x-0 opacity-100"
+                        : "translate-x-12 opacity-0"
+                        }`}
+                    >
+                      <Image
+                        src={project.mobile_image}
+                        alt={`${project.title} mobile`}
+                        width={256}
+                        height={512}
+                        className="w-full h-auto object-contain"
+                      />
                     </div>
                   </div>
+
+                  {/* CONTENT */}
+                  <div
+                    className={`p-5 sm:p-6 lg:p-8 flex flex-col justify-between transition-all duration-700 delay-200 ${visible[i]
+                      ? "opacity-100 translate-y-0"
+                      : "opacity-0 translate-y-6"
+                      }`}
+                  >
+                    <div>
+                      <div className="flex items-center gap-3 mb-4 sm:mb-5">
+                        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg border border-border overflow-hidden flex-shrink-0 bg-muted relative">
+                          <Image
+                            src={project.icon}
+                            alt={`${project.title} icon`}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground">
+                            {project.platform} · {project.year}
+                          </p>
+                        </div>
+                      </div>
+
+                      <h3 className="text-xl sm:text-2xl font-bold tracking-tight mb-3">
+                        {project.title}
+                      </h3>
+
+                      <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-5">
+                        {project.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {project.tags.map((tag, idx) => (
+                          <span
+                            key={idx}
+                            className="text-xs px-2.5 sm:px-3 py-1 rounded-full border text-muted-foreground"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 flex-wrap">
+                      {project.completed ? (
+                        <a
+                          href={project.live_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-black text-white text-sm font-medium transition hover:opacity-90"
+                        >
+                          <span>View Live</span>
+
+                          <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white text-black text-xs transition-transform group-hover:translate-x-0.5">
+                            <ArrowUpRight className="h-4 w-4" />
+                          </span>
+                        </a>
+                      ) : (
+                        <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-muted text-muted-foreground text-sm font-medium cursor-not-allowed opacity-70">
+                          In Progress
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
                 </div>
-              </BlurFade>
+              </div>
             ))
           ) : (
-            <BlurFade>
-              <div className="text-center py-20">
-                <Layers
-                  size={48}
-                  strokeWidth={1}
-                  className="text-ctext-muted mx-auto mb-4 opacity-40"
-                />
-                <p className="font-body text-ctext-muted">
-                  No projects found for this filter.
-                </p>
-              </div>
-            </BlurFade>
+            <p className="text-center text-muted-foreground py-16">
+              No projects found for this filter.
+            </p>
           )}
         </div>
-      </section>
-
-      {/* ─── CTA ─── */}
-      <section className="relative py-16 lg:py-24 overflow-hidden">
-        <DotPattern dotColor="rgba(0,0,0,0.04)" />
-
-        <div className="relative z-10 max-w-2xl mx-auto px-4 text-center">
-          <BlurFade>
-            <Briefcase
-              size={40}
-              strokeWidth={1.5}
-              className="text-primary mx-auto mb-5"
-            />
-
-            <h2 className="font-heading text-2xl sm:text-3xl font-bold text-ctext-primary mb-3">
-              Have a Project in Mind?
-            </h2>
-
-            <p className="font-body text-ctext-secondary mb-8 max-w-lg mx-auto">
-              We build software systems that solve real business problems.
-              Let&apos;s discuss your idea.
-            </p>
-
-            <Link href="/contact">
-              <RainbowButton className="text-base px-8 py-4">
-                Start a Project
-                <ArrowRight
-                  size={20}
-                  strokeWidth={1.5}
-                  className="ml-2"
-                />
-              </RainbowButton>
-            </Link>
-          </BlurFade>
-        </div>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }
