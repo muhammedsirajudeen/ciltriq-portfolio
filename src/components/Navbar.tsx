@@ -31,6 +31,10 @@ const Navbar = () => {
     setIsOpen(false);
   }, [pathname]);
 
+  if (pathname?.startsWith("/chali")) {
+    return null;
+  }
+
   return (
     <nav
       className={cn(

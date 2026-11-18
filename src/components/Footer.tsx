@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Phone, MapPin } from "lucide-react";
 
 import {
@@ -31,6 +32,12 @@ const footerCompany = [
 ];
 
 const Footer = () => {
+  const pathname = usePathname();
+
+  if (pathname?.startsWith("/chali")) {
+    return null;
+  }
+
   return (
     <footer className="relative overflow-hidden bg-ctext-primary text-white">
       <RetroGrid />
